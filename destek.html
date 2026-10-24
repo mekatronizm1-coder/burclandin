@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Burçlandın Destek</title>
+  <meta name="description" content="Burçlandın uygulaması için destek, sık sorulan sorular ve iletişim." />
+  <meta name="theme-color" content="#0b0820" />
+  <link rel="icon" href="img/favicon.png" />
+  <style>
+    :root { color-scheme: dark; --bg: #0b0820; --card: rgba(255,255,255,0.05); --border: rgba(255,255,255,0.12); --fg: #f4f1ff; --muted: #a9a2c9; --gold: #f5c66b; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: radial-gradient(ellipse at 50% -10%, #3b2385 0%, #1a1240 40%, var(--bg) 75%) fixed, var(--bg); color: var(--fg); font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 24px 20px 48px; }
+    a { color: var(--gold); }
+    a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--gold); font-weight: 800; font-size: 1.2rem; text-decoration: none; }
+    .brand img { width: 34px; height: 34px; border-radius: 50%; }
+    h1 { color: var(--gold); font-size: clamp(1.9rem, 5vw, 2.6rem); line-height: 1.15; margin: 32px 0 8px; }
+    h2 { font-size: 1.2rem; margin: 36px 0 12px; }
+    .sub { color: var(--muted); margin: 0 0 24px; }
+    .contact { padding: 20px; border-radius: 18px; border: 1px solid rgba(245,198,107,0.5); background: rgba(245,198,107,0.08); }
+    .contact .mail { font-size: 1.2rem; font-weight: 800; word-break: break-all; }
+    .contact p { color: var(--muted); margin: 8px 0 0; font-size: 0.95rem; }
+    details { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 14px 18px; margin-bottom: 10px; }
+    summary { cursor: pointer; font-weight: 700; }
+    details p { color: var(--muted); margin: 10px 0 0; }
+    footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.9rem; }
+    footer a { color: var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="brand" href="./"><img src="img/logo.png" alt="" width="34" height="34" />Burçlandın</a>
+
+    <h1>Destek</h1>
+    <p class="sub">Uygulamayla ilgili soru, öneri ve hata bildirimleri için buradayız.</p>
+
+    <div class="contact">
+      <div>E-posta:</div>
+      <div class="mail"><a href="mailto:mekatronizm1@gmail.com?subject=Burçlandın%20destek">mekatronizm1@gmail.com</a></div>
+      <p>Bir hata bildiriyorsan telefon modelini ve sorunun nasıl oluştuğunu yazman çözmemizi hızlandırır. Genellikle birkaç gün içinde yanıt veririz.</p>
+    </div>
+
+    <h2>Sık Sorulan Sorular</h2>
+    <details><summary>Doğum saatimi bilmiyorum, kullanabilir miyim?</summary><p>Evet. Doğum saatini boş bırakabilirsin; Güneş ve gezegen yorumların yine çalışır, yalnızca yükselen burç ve evler gösterilmez. Saatini sonradan Profil'den ekleyebilirsin.</p></details>
+    <details><summary>Yorumlar nasıl hesaplanıyor?</summary><p>Gezegenlerin konumları açık kaynaklı astronomy-engine kütüphanesiyle telefonunda hesaplanır. Günlük puanlar, o günün gezegenlerinin senin doğum haritana yaptığı açılara göre belirlenir ve her yorumun gerekçesi yazar.</p></details>
+    <details><summary>Uygulama internet istiyor mu?</summary><p>Hayır. Tüm hesaplamalar cihazında yapılır; uygulama internetsiz de tam çalışır.</p></details>
+    <details><summary>Bilgilerim nerede saklanıyor?</summary><p>Yalnızca telefonunda. Hesap, sunucu ve reklam yoktur. Profil ve ayarlar ekranındaki “Tüm verilerimi sıfırla” ile hepsini silebilirsin; uygulamayı kaldırınca da silinir. Ayrıntılar: <a href="gizlilik.html">Gizlilik Politikası</a>.</p></details>
+    <details><summary>Bildirimler gelmiyor, ne yapmalıyım?</summary><p>Önce uygulamada sağ üstteki avatarına dokun ve Profil ve ayarlar ekranında bildirimlerin açık olduğunu kontrol et. Sonra telefonun Ayarlar → Bildirimler bölümünde Burçlandın'a izin verildiğinden emin ol. Pil tasarrufu modu bazı telefonlarda bildirimleri geciktirebilir.</p></details>
+    <details><summary>Ana ekran bileşenini (widget) nasıl eklerim?</summary><p>Ana ekranda boş bir yere basılı tut, “Widget” ya da “Bileşenler”i seç ve listeden Burçlandın'ı ekle. Bileşen, uygulamayı açtığında güncellenir.</p></details>
+    <details><summary>Bir hata buldum, nasıl bildiririm?</summary><p>Uygulamada Profil → Hakkında → Hata kayıtları bölümünden raporu e-postayla gönderebilir ya da yukarıdaki adrese yazabilirsin.</p></details>
+
+    <footer>
+      Burçlandın eğlence ve kendini tanıma amaçlıdır; yorumlar bilimsel bir öngörü değildir.<br />
+      <a href="./">Ana sayfa</a> · <a href="gizlilik.html">Gizlilik Politikası</a>
+    </footer>
+  </div>
+</body>
+</html>

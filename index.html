@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Burçlandın – Gerçek Gökyüzüyle Burç Yorumu</title>
+  <meta name="description" content="Burçlandın, burç yorumlarını gezegenlerin gerçek konumlarından hesaplayan bir astroloji uygulaması: günlük yorum, doğum haritası, Ay evreleri, uyum ve gün planlayıcı." />
+  <meta property="og:title" content="Burçlandın – Gerçek Gökyüzüyle Burç Yorumu" />
+  <meta property="og:description" content="Günlük yorum, doğum haritası, Ay evreleri, uyum ve gün planlayıcı. Hesap yok, reklam yok." />
+  <meta property="og:image" content="img/video-kapak.jpg" />
+  <meta name="theme-color" content="#0b0820" />
+  <link rel="icon" href="img/favicon.png" />
+  <style>
+    /* Gece göğü teması: uygulamanın kendi renkleri. Tek tema (koyu), bilinçli tercih. */
+    :root {
+      color-scheme: dark;
+      --bg: #0b0820;
+      --bg2: #1a1240;
+      --card: rgba(255, 255, 255, 0.05);
+      --border: rgba(255, 255, 255, 0.12);
+      --fg: #f4f1ff;
+      --muted: #a9a2c9;
+      --gold: #f5c66b;
+      --violet: #b388ff;
+      --display: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+      --body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    body {
+      margin: 0;
+      background: radial-gradient(ellipse at 50% -10%, #3b2385 0%, var(--bg2) 40%, var(--bg) 75%) fixed, var(--bg);
+      color: var(--fg);
+      font: 17px/1.6 var(--body);
+    }
+    .wrap { max-width: 1080px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left)); padding-right: max(20px, env(safe-area-inset-right)); }
+    a { color: var(--gold); }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+    header.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 20px; }
+    .brand { display: flex; align-items: center; gap: 10px; color: var(--gold); font-weight: 800; font-size: 1.25rem; text-decoration: none; }
+    .brand img { width: 36px; height: 36px; border-radius: 50%; }
+    nav.links { display: flex; gap: 18px; flex-wrap: wrap; }
+    nav.links a { color: var(--muted); text-decoration: none; font-size: 0.95rem; }
+    nav.links a:hover { color: var(--fg); }
+
+    .hero { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; padding-block: 40px 64px; }
+    .hero h1 { font: 800 clamp(2.4rem, 6vw, 4rem)/1.05 var(--display); color: var(--gold); margin: 0 0 12px; text-wrap: balance; letter-spacing: -0.01em; }
+    .hero .tag { font-size: clamp(1.15rem, 2.4vw, 1.45rem); margin: 0 0 18px; }
+    .hero p.lead { color: var(--muted); max-width: 52ch; margin: 0 0 28px; }
+    .stores { display: flex; gap: 12px; flex-wrap: wrap; }
+    .store { display: inline-flex; flex-direction: column; padding: 10px 20px; border-radius: 14px; border: 1px solid var(--border); background: var(--card); color: var(--fg); text-decoration: none; min-width: 170px; }
+    .store small { color: var(--muted); font-size: 0.75rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    .store strong { font-size: 1.05rem; }
+    .phone { justify-self: center; width: min(320px, 100%); aspect-ratio: 9 / 16; border-radius: 40px; border: 3px solid rgba(245, 198, 107, 0.55); background: #05030f; padding: 10px; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5); }
+    .phone img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 30px; display: block; }
+
+    section { padding-block: 56px; }
+    h2 { font: 800 clamp(1.7rem, 3.6vw, 2.3rem)/1.15 var(--display); color: var(--gold); margin: 0 0 8px; text-wrap: balance; }
+    .sub { color: var(--muted); margin: 0 0 32px; max-width: 60ch; }
+
+    .video { width: 100%; max-width: 960px; border-radius: 20px; border: 1px solid var(--border); display: block; background: #000; aspect-ratio: 16 / 9; }
+
+    .features { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .feature { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 20px; }
+    .feature .ico { font-size: 1.6rem; }
+    .feature h3 { margin: 8px 0 6px; font-size: 1.1rem; }
+    .feature p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+
+    .shots { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 12px; scroll-snap-type: x mandatory; }
+    .shots figure { margin: 0; flex: 0 0 220px; scroll-snap-align: start; }
+    .shots img { width: 220px; aspect-ratio: 9 / 16; object-fit: cover; object-position: top; border-radius: 22px; border: 1px solid var(--border); display: block; }
+    .shots figcaption { color: var(--muted); font-size: 0.9rem; text-align: center; margin-top: 8px; }
+
+    .privacy { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .privacy div { border-left: 3px solid var(--violet); padding-left: 14px; }
+    .privacy strong { display: block; }
+    .privacy span { color: var(--muted); font-size: 0.95rem; }
+
+    details { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 14px 18px; margin-bottom: 10px; }
+    summary { cursor: pointer; font-weight: 700; }
+    details p { color: var(--muted); margin: 10px 0 0; }
+    .contact { margin-top: 24px; padding: 20px; border-radius: 18px; border: 1px solid rgba(245, 198, 107, 0.5); background: rgba(245, 198, 107, 0.08); }
+    .contact .mail { font-size: 1.2rem; font-weight: 800; user-select: all; }
+
+    footer { padding-block: 40px; color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--border); margin-top: 32px; display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
+    footer a { color: var(--muted); }
+
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; text-align: left; }
+      .features, .privacy { grid-template-columns: 1fr; }
+      nav.links { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <a class="brand" href="#"><img src="img/logo.png" alt="" width="36" height="36" />Burçlandın</a>
+      <nav class="links" aria-label="Sayfa bölümleri">
+        <a href="#video">Tanıtım</a>
+        <a href="#ozellikler">Özellikler</a>
+        <a href="#gizlilik">Gizlilik</a>
+        <a href="#destek">Destek</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="baslik">
+        <div>
+          <h1 id="baslik">Burçlandın</h1>
+          <p class="tag">Gerçek Gökyüzüyle Burç Yorumu</p>
+          <p class="lead">Yorumların hazır kalıplardan değil, gezegenlerin bugünkü gerçek konumlarından hesaplanır. Doğum haritanı girersen her şey sana özel olur: günlük yorum, Ay evreleri, retrolar, uyum ve önemli işlerin için en uygun günler.</p>
+          <div class="stores">
+            <span class="store" aria-label="Google Play'de yakında"><small>Yakında</small><strong>Google Play</strong></span>
+            <span class="store" aria-label="App Store'da yakında"><small>Yakında</small><strong>App Store</strong></span>
+          </div>
+        </div>
+        <div class="phone"><img src="img/02-bugun.jpg" alt="Burçlandın Bugün ekranı: kişisel günlük yorum ve gökyüzünün etkisi" width="540" height="960" /></div>
+      </section>
+
+      <section id="video" aria-labelledby="video-baslik">
+        <h2 id="video-baslik">Tanıtım Videosu</h2>
+        <p class="sub">24 saniyede Burçlandın.</p>
+        <video class="video" controls preload="none" poster="img/video-kapak.jpg" playsinline>
+          <source src="tanitim.mp4" type="video/mp4" />
+        </video>
+      </section>
+
+      <section id="ozellikler" aria-labelledby="ozellik-baslik">
+        <h2 id="ozellik-baslik">Neler Var?</h2>
+        <p class="sub">Tüm hesaplamalar cihazında, gerçek astronomik verilerle yapılır.</p>
+        <div class="features">
+          <div class="feature"><div class="ico">☀️</div><h3>Günlük, Haftalık, Yıllık</h3><p>Aşk, kariyer, sağlık ve şans puanları o günün gezegenlerinden; her yorumun gerekçesiyle.</p></div>
+          <div class="feature"><div class="ico">🌙</div><h3>Gökyüzü Takvimi</h3><p>Ay'ın evresi ve burcu, retro gezegenler, yeniay, dolunay ve tutulmalar.</p></div>
+          <div class="feature"><div class="ico">🧭</div><h3>Doğum Haritası</h3><p>Yükselen burç, 12 ev ve gezegenler arası açılar; doğum günü haritası.</p></div>
+          <div class="feature"><div class="ico">💞</div><h3>Uyum</h3><p>Burç uyumu, iki kişinin tam haritasını karşılaştıran sinastri ve günün en uyumlu arkadaşı.</p></div>
+          <div class="feature"><div class="ico">📅</div><h3>Gün Planlayıcı</h3><p>İlk buluşma, iş görüşmesi ya da yeni başlangıç için önümüzdeki 30 günün en uygun günleri.</p></div>
+          <div class="feature"><div class="ico">📓</div><h3>Günlük ve Niyetler</h3><p>Ruh halinin Ay evreleriyle ilişkisini gör; yeniayda niyet yaz, dolunayda sonucuna bak.</p></div>
+        </div>
+      </section>
+
+      <section aria-labelledby="ekran-baslik">
+        <h2 id="ekran-baslik">Ekranlar</h2>
+        <div class="shots" tabindex="0" aria-label="Uygulama ekran görüntüleri, yatay kaydırılabilir">
+          <figure><img src="img/02-bugun.jpg" alt="Bugün ekranı" width="540" height="960" loading="lazy" /><figcaption>Bugün</figcaption></figure>
+          <figure><img src="img/03-gokyuzu.jpg" alt="Gökyüzü takvimi ekranı" width="540" height="960" loading="lazy" /><figcaption>Gökyüzü</figcaption></figure>
+          <figure><img src="img/04-harita.jpg" alt="Doğum haritası ekranı" width="540" height="960" loading="lazy" /><figcaption>Doğum Haritası</figcaption></figure>
+          <figure><img src="img/05-planlayici.jpg" alt="Gün planlayıcı ekranı" width="540" height="960" loading="lazy" /><figcaption>Gün Planlayıcı</figcaption></figure>
+          <figure><img src="img/06-dogum-gunu.jpg" alt="Doğum günü haritası ekranı" width="540" height="960" loading="lazy" /><figcaption>Doğum Günü Haritası</figcaption></figure>
+          <figure><img src="img/07-gunluk.jpg" alt="Ruh hali günlüğü ekranı" width="540" height="960" loading="lazy" /><figcaption>Günlük</figcaption></figure>
+        </div>
+      </section>
+
+      <section id="gizlilik" aria-labelledby="gizlilik-baslik">
+        <h2 id="gizlilik-baslik">Gizlilik</h2>
+        <p class="sub">Bilgilerin yalnızca senin telefonunda kalır. Ayrıntılar için <a href="gizlilik.html">gizlilik politikasını</a> okuyabilirsin.</p>
+        <div class="privacy">
+          <div><strong>Hesap yok</strong><span>Kayıt olmadan, giriş yapmadan kullanılır.</span></div>
+          <div><strong>Sunucu yok</strong><span>Verilerin hiçbir yere gönderilmez; internetsiz çalışır.</span></div>
+          <div><strong>Reklam yok</strong><span>Reklam ve kullanım istatistiği toplanmaz.</span></div>
+        </div>
+      </section>
+
+      <section id="destek" aria-labelledby="destek-baslik">
+        <h2 id="destek-baslik">Destek</h2>
+        <p class="sub">Sık sorulan sorular ve iletişim.</p>
+        <details><summary>Doğum saatimi bilmiyorum, kullanabilir miyim?</summary><p>Evet. Doğum saatini boş bırakabilirsin; Güneş ve gezegen yorumların yine çalışır, yalnızca yükselen burç ve evler gösterilmez. Saatini sonradan Profil'den ekleyebilirsin.</p></details>
+        <details><summary>Yorumlar nasıl hesaplanıyor?</summary><p>Gezegenlerin konumları açık kaynaklı astronomy-engine kütüphanesiyle telefonunda hesaplanır. Günlük puanlar, o günün gezegenlerinin senin doğum haritana yaptığı açılara göre belirlenir ve her yorumun gerekçesi yazar.</p></details>
+        <details><summary>Bilgilerim nerede saklanıyor?</summary><p>Yalnızca telefonunda. Profil ve ayarlar ekranındaki “Tüm verilerimi sıfırla” ile hepsini silebilirsin; uygulamayı kaldırınca da silinir.</p></details>
+        <details><summary>Bildirimleri nasıl açar ya da kapatırım?</summary><p>Uygulamada sağ üstteki avatarına dokun, Profil ve ayarlar ekranındaki bildirim anahtarlarını kullan.</p></details>
+        <details><summary>Bir hata buldum, nasıl bildiririm?</summary><p>Uygulamada Profil → Hakkında → Hata kayıtları bölümünden raporu e-postayla gönderebilir ya da aşağıdaki adrese yazabilirsin.</p></details>
+        <div class="contact">
+          <div>Soru, öneri ve hata bildirimleri için:</div>
+          <div class="mail"><a href="mailto:mekatronizm1@gmail.com">mekatronizm1@gmail.com</a></div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>© 2026 Burçlandın · Eğlence ve kendini tanıma amaçlıdır; yorumlar bilimsel bir öngörü değildir.</span>
+      <span><a href="gizlilik.html">Gizlilik Politikası</a> · <a href="#destek">Destek</a></span>
+    </footer>
+  </div>
+</body>
+</html>
